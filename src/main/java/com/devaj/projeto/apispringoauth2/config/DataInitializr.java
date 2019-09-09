@@ -2,6 +2,7 @@ package com.devaj.projeto.apispringoauth2.config;
 
 import com.devaj.projeto.apispringoauth2.entity.Role;
 import com.devaj.projeto.apispringoauth2.entity.User;
+import com.devaj.projeto.apispringoauth2.repository.RoleRepository;
 import com.devaj.projeto.apispringoauth2.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
@@ -21,6 +22,9 @@ public class DataInitializr implements ApplicationListener<ContextRefreshedEvent
     private UserRepository userRepository;
 
     @Autowired
+    private RoleRepository roleRepository;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Override
@@ -37,6 +41,8 @@ public class DataInitializr implements ApplicationListener<ContextRefreshedEvent
 
         Role roleObj =  new Role();
         roleObj.setName(role);
+
+        this.roleRepository.save(roleObj);
 
         User newUser = new User(name, email, password, Arrays.asList(roleObj));
 

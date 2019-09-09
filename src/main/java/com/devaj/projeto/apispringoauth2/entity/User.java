@@ -38,4 +38,11 @@ public class User {
         this.roles = roles;
     }
 
+    public User(User user) {
+        super();
+        this.name = user.getName();
+        this.email = user.getEmail();
+        this.roles  = user.getRoles();
+        this.password  = user.getPassword();
+    }
 }

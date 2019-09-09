@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.data.web.SortDefault;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -20,6 +21,7 @@ public class UserController {
     private UserRepository userRepository;
 
 
+    @Secured({"ROLE_ADMIN", "ROLE_SIMPLE"})
     @GetMapping
     public Page<User> list(@PageableDefault(page = 0, size = 5)
                                @SortDefault.SortDefaults({
